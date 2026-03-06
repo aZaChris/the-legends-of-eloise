@@ -116,8 +116,8 @@ export default function Home() {
               <Triforce size="md" />
             </div>
             <div className="max-w-md space-y-6 text-zelda-gold italic text-xl">
-              <p>"Dicono che un eroe non conti mai il tempo."</p>
-              <p>"Per Link, ogni secondo trascorso a cercare Zelda è solo un battito di un'eternità già scritta."</p>
+              <p>&quot;Dicono che un eroe non conti mai il tempo.&quot;</p>
+              <p>&quot;Per Link, ogni secondo trascorso a cercare Zelda è solo un battito di un&apos;eternità già scritta.&quot;</p>
               <p className="not-italic font-fantasy text-2xl mt-8">Il mio tempo per te è senza confini.</p>
             </div>
             <button
@@ -307,7 +307,7 @@ export default function Home() {
             </motion.div>
 
             <h2 className="text-2xl mb-12 italic text-zelda-tan/70">
-              C'è solo un'ultima scelta prima che l'avventura possa continuare.
+              C&apos;è solo un&apos;ultima scelta prima che l&apos;avventura possa continuare.
             </h2>
 
             <div className="my-16">
@@ -372,7 +372,7 @@ export default function Home() {
               transition={{ delay: 3 }}
               className="text-zelda-tan/50 italic text-sm"
             >
-              <p>brava, sei rimasta soltanto {listenDuration} minuti ad ascoltare Zelda's Lullaby...</p>
+              <p>brava, sei rimasta soltanto {listenDuration} minuti ad ascoltare Zelda&apos;s Lullaby...</p>
               <p className="mt-1 font-fantasy tracking-wider uppercase">good girl</p>
             </motion.div>
           </motion.div>
@@ -408,7 +408,7 @@ export default function Home() {
                   </h1>
 
                   <div className="space-y-4 text-xl text-zelda-tan/80 italic mb-12">
-                    <p>L'eroe è stato sconfitto…</p>
+                    <p>L&apos;eroe è stato sconfitto…</p>
                     <p>ma continuerà comunque a portarti</p>
                     <p>meme, musica</p>
                     <p>e compagnia nelle future side quest.</p>
@@ -427,7 +427,7 @@ export default function Home() {
                       className="group flex items-center justify-center gap-2 w-full py-3 text-gray-500 font-sans text-sm hover:text-gray-400 transition-colors"
                     >
                       <HomeIcon size={16} />
-                      Continua l'avventura
+                      Continua l&apos;avventura
                     </button>
                   </div>
                 </motion.div>
