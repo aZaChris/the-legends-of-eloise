@@ -11,6 +11,17 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        zelda: {
+          gold: "#D4AF37",
+          emerald: "#064e3b",
+          red: "#ef4444",
+          dark: "#0a0a0a",
+          tan: "#f5e6d3",
+        },
+      },
+      fontFamily: {
+        fantasy: ["var(--font-cinzel)", "serif"],
+        serif: ["var(--font-serif)", "serif"],
       },
     },
   },
