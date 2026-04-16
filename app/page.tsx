@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, RefreshCw, Home as HomeIcon } from "lucide-react";
+import { RefreshCw, Home as HomeIcon } from "lucide-react";
 import DynamicBackground from "@/components/DynamicBackground";
 import ZeldaHeart from "@/components/ZeldaHeart";
 import Triforce from "@/components/Triforce";
@@ -87,7 +87,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-      {currentScreen !== "TIMELINE" && <DynamicBackground screen={currentScreen as any} />}
+      {currentScreen !== "TIMELINE" && <DynamicBackground screen={currentScreen as NonNullable<React.ComponentProps<typeof DynamicBackground>["screen"]>} />}
 
 
       {/* Vignette Overlay for Failure */}
