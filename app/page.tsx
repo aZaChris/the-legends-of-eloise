@@ -336,7 +336,7 @@ export default function Home() {
       <audio
         ref={audioRef}
         loop
-        src="" // User will need to add their own audio src
+        src="/media/zelda-lullaby.mp3"
       />
     </main>
   );
