@@ -46,12 +46,18 @@ export default function Home() {
     }
   }, [failureStage, heartsCount]);
 
-  // Handle Lullaby Timer
+  // Auto-start audio on mount
   useEffect(() => {
-    if (audioStarted && startTime === null) {
-      setStartTime(Date.now());
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5;
+      audioRef.current.play()
+        .then(() => {
+          setAudioStarted(true);
+          setStartTime(Date.now());
+        })
+        .catch(e => console.log("Autoplay blocked by browser:", e));
     }
-  }, [audioStarted, startTime]);
+  }, []);
 
   // Format final duration
   const finalizeTimer = () => {
@@ -64,12 +70,15 @@ export default function Home() {
   };
 
   const handleStartInteraction = () => {
+    // If autoplay was blocked, try again on first user interaction
     if (!audioStarted && audioRef.current) {
       audioRef.current.volume = 0.5;
       audioRef.current.play()
-        .then(() => console.log("Audio started successfully"))
+        .then(() => {
+          setAudioStarted(true);
+          setStartTime(Date.now());
+        })
         .catch(e => console.error("Audio play failed:", e));
-      setAudioStarted(true);
     }
     setCurrentScreen("TIMELINE");
   };
@@ -339,6 +348,7 @@ export default function Home() {
       <audio
         ref={audioRef}
         loop
+        autoPlay
         preload="auto"
         src="/media/zelda-lullaby.mp3"
       />
