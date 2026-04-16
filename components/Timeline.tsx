@@ -120,10 +120,7 @@ const variants = {
 export default function Timeline() {
     const [[page, direction], setPage] = useState([0, 0]);
 
-    const slideIndex = Math.abs(page % timelineSlides.length);
-    const isValidIndex = page >= 0 && page < timelineSlides.length;
-    // We constrain the page so it doesn't wrap wildly, or we can just let it wrap if we want.
-    // Let's constrain it so it stops at limits.
+
     
     const paginate = (newDirection: number) => {
         const nextSlide = page + newDirection;
