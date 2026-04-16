@@ -70,14 +70,13 @@ export default function Home() {
   };
 
   const handleStartInteraction = () => {
+    // Timer starts exactly when user presses "Inizia"
+    setStartTime(Date.now());
     // If autoplay was blocked, try again on first user interaction
     if (!audioStarted && audioRef.current) {
       audioRef.current.volume = 0.5;
       audioRef.current.play()
-        .then(() => {
-          setAudioStarted(true);
-          setStartTime(Date.now());
-        })
+        .then(() => setAudioStarted(true))
         .catch(e => console.error("Audio play failed:", e));
     }
     setCurrentScreen("TIMELINE");
