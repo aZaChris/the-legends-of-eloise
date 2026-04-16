@@ -6,10 +6,11 @@ import { ChevronRight, RefreshCw, Home as HomeIcon } from "lucide-react";
 import DynamicBackground from "@/components/DynamicBackground";
 import ZeldaHeart from "@/components/ZeldaHeart";
 import Triforce from "@/components/Triforce";
+import Timeline from "@/components/Timeline";
 import Hero from "@/components/Hero";
 
 // Screen types
-type Screen = "START" | "INTRO" | "STORY" | "HEARTS" | "CONFESSION" | "SUCCESS" | "FAILURE";
+type Screen = "START" | "TIMELINE" | "CONFESSION" | "SUCCESS" | "FAILURE";
 
 export default function Home() {
   const [currentScreen, setCurrentScreen] = useState<Screen>("START");
@@ -67,7 +68,7 @@ export default function Home() {
       audioRef.current.play().catch(e => console.log("Audio play blocked", e));
       setAudioStarted(true);
     }
-    setCurrentScreen("INTRO");
+    setCurrentScreen("TIMELINE");
   };
 
   const nextScreen = (screen: Screen) => {
@@ -86,7 +87,8 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-      <DynamicBackground screen={currentScreen} />
+      {currentScreen !== "TIMELINE" && <DynamicBackground screen={currentScreen as any} />}
+
 
       {/* Vignette Overlay for Failure */}
       <AnimatePresence>
@@ -176,119 +178,13 @@ export default function Home() {
           </motion.div>
         )}
 
-        {currentScreen === "INTRO" && (
+        {currentScreen === "TIMELINE" && (
           <motion.div
-            key="intro"
+            key="timeline"
             {...transitionProps}
-            className="z-10 max-w-md"
+            className="z-10 w-full h-full flex flex-col items-center justify-center absolute inset-0 p-0"
           >
-            <h1 className="text-4xl md:text-5xl mb-8 leading-tight">
-              Una nuova quest è iniziata
-            </h1>
-            <div className="space-y-4 text-lg text-zelda-tan/80 mb-12">
-              <p>Nel vasto regno delle coincidenze,</p>
-              <p>delle chat infinite</p>
-              <p>e delle conversazioni improbabili,</p>
-              <p className="mt-6">un avventuriero ha trovato qualcosa di raro.</p>
-              <p>Non una spada leggendaria.</p>
-              <p>Non una reliquia perduta.</p>
-              <p className="text-zelda-gold font-fantasy text-xl mt-4">Ma qualcuno con cui iniziare una nuova avventura.</p>
-            </div>
-            <button
-              onClick={() => nextScreen("STORY")}
-              className="group relative px-8 py-3 bg-zelda-emerald border-2 border-zelda-gold text-zelda-gold font-fantasy text-xl tracking-widest hover:bg-zelda-gold hover:text-zelda-emerald transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-            >
-              Inizia la quest
-              <ChevronRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </motion.div>
-        )}
-
-        {currentScreen === "STORY" && (
-          <motion.div
-            key="story"
-            {...transitionProps}
-            className="z-10 max-w-md flex flex-col items-center"
-          >
-            <div className="space-y-6 text-xl text-zelda-tan/90 leading-relaxed mb-12">
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>Ogni eroe esplora dungeon,</motion.p>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>risolve enigmi</motion.p>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}>e attraversa mondi strani.</motion.p>
-
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4.5 }} className="mt-8 font-fantasy">Ma anche gli eroi più testardi</motion.p>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 5.5 }}>prima o poi capiscono una cosa:</motion.p>
-
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 7.5 }} className="text-2xl text-zelda-gold">le avventure sono molto migliori</motion.p>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 8.5 }}>quando non si affrontano da soli.</motion.p>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 10.5 }}
-                className="flex gap-2 justify-center my-4"
-              >
-                <span className="px-2 py-1 bg-white/5 rounded text-sm italic">giochi</span>
-                <span className="px-2 py-1 bg-white/5 rounded text-sm italic">musica</span>
-                <span className="px-2 py-1 bg-white/5 rounded text-sm italic">meme</span>
-              </motion.div>
-
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 12.5 }}>è successa una cosa strana.</motion.p>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 14.5 }} className="text-2xl font-fantasy text-zelda-gold">
-                Ho iniziato a pensare che forse la parte più bella di questa quest sei semplicemente tu.
-              </motion.p>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 16 }}
-              className="mt-4"
-            >
-              <button
-                onClick={() => nextScreen("HEARTS")}
-                className="px-10 py-3 border-2 border-zelda-gold/50 text-zelda-gold font-fantasy text-lg hover:border-zelda-gold hover:shadow-[0_0_10px_rgba(212,175,55,0.3)] transition-all"
-              >
-                Continua
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {currentScreen === "HEARTS" && (
-          <motion.div
-            key="hearts"
-            {...transitionProps}
-            className="z-10 max-w-md w-full"
-          >
-            <h2 className="text-3xl font-fantasy mb-8">Cuori ottenuti</h2>
-            <p className="text-lg mb-12 text-zelda-tan/80">
-              Nel mondo di Zelda la vita si misura in cuori.<br /><br />
-              Ogni cuore rappresenta qualcosa di raro:<br />
-              fiducia, tempo condiviso, risate inaspettate.<br /><br />
-              E senza nemmeno accorgermene...<br />
-              <span className="text-zelda-gold">credo di averne guadagnati alcuni grazie a te.</span>
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <ZeldaHeart filled delay={0.5} />
-              <ZeldaHeart filled delay={1.5} />
-              <ZeldaHeart filled delay={2.5} />
-              <ZeldaHeart filled delay={3.5} />
-              <ZeldaHeart filled delay={4.5} />
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 6 }}
-            >
-              <button
-                onClick={() => nextScreen("CONFESSION")}
-                className="px-10 py-3 bg-zelda-emerald/40 border border-zelda-gold text-zelda-gold font-fantasy text-lg hover:bg-zelda-emerald transition-all"
-              >
-                Ultima quest
-              </button>
-            </motion.div>
+            <Timeline onComplete={() => nextScreen("CONFESSION")} />
           </motion.div>
         )}
 
@@ -423,7 +319,7 @@ export default function Home() {
                       Riprova la quest
                     </button>
                     <button
-                      onClick={() => nextScreen("INTRO")}
+                      onClick={() => nextScreen("TIMELINE")}
                       className="group flex items-center justify-center gap-2 w-full py-3 text-gray-500 font-sans text-sm hover:text-gray-400 transition-colors"
                     >
                       <HomeIcon size={16} />

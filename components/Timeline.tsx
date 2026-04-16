@@ -116,8 +116,11 @@ const variants = {
         };
     }
 };
+interface TimelineProps {
+    onComplete?: () => void;
+}
 
-export default function Timeline() {
+export default function Timeline({ onComplete }: TimelineProps) {
     const [[page, direction], setPage] = useState([0, 0]);
 
 
@@ -203,10 +206,15 @@ export default function Timeline() {
                 </div>
 
                 <button
-                    onClick={() => paginate(1)}
-                    disabled={page === timelineSlides.length - 1}
+                    onClick={() => {
+                        if (page === timelineSlides.length - 1) {
+                            onComplete?.();
+                        } else {
+                            paginate(1);
+                        }
+                    }}
                     className={`p-3 rounded-full border border-[#D4AF37]/50 backdrop-blur-sm transition-all duration-300
-                        ${page === timelineSlides.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#D4AF37]/20 hover:scale-110 text-[#D4AF37]'}`}
+                        ${page === timelineSlides.length - 1 ? 'hover:bg-[#D4AF37] hover:scale-110 text-[#D4AF37] hover:text-black shadow-[0_0_15px_rgba(212,175,55,0.5)]' : 'hover:bg-[#D4AF37]/20 hover:scale-110 text-[#D4AF37]'}`}
                 >
                     <ChevronRight className="w-6 h-6" />
                 </button>
