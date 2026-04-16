@@ -65,7 +65,10 @@ export default function Home() {
 
   const handleStartInteraction = () => {
     if (!audioStarted && audioRef.current) {
-      audioRef.current.play().catch(e => console.log("Audio play blocked", e));
+      audioRef.current.volume = 0.5;
+      audioRef.current.play()
+        .then(() => console.log("Audio started successfully"))
+        .catch(e => console.error("Audio play failed:", e));
       setAudioStarted(true);
     }
     setCurrentScreen("TIMELINE");
@@ -336,6 +339,7 @@ export default function Home() {
       <audio
         ref={audioRef}
         loop
+        preload="auto"
         src="/media/zelda-lullaby.mp3"
       />
     </main>
